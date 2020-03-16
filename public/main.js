@@ -17,32 +17,34 @@ const updateTeamTwo = () => {
   updateTeamName('.team-2-input', '.team-2-name')
 }
 
-const addTeamOneScore = () => {
-  const currentScore = document.querySelector('.team-1-score').textContent
+const addTeamScore = teamScore => {
+  const currentScore = document.querySelector(teamScore).textContent
   console.log(currentScore)
   const addOne = parseInt(currentScore) + 1
-  document.querySelector('.team-1-score').textContent = addOne
+  document.querySelector(teamScore).textContent = addOne
+}
+
+const addTeamOneScore = () => {
+  addTeamScore('.team-1-score')
 }
 
 const addTeamTwoScore = () => {
-  const currentScore = document.querySelector('.team-2-score').textContent
+  addTeamScore('.team-2-score')
+}
+
+const subTeamScore = teamScore => {
+  const currentScore = document.querySelector(teamScore).textContent
   console.log(currentScore)
-  const addOne = parseInt(currentScore) + 1
-  document.querySelector('.team-2-score').textContent = addOne
+  const addOne = parseInt(currentScore) - 1
+  document.querySelector(teamScore).textContent = addOne
 }
 
 const subTeamOneScore = () => {
-  const currentScore = document.querySelector('.team-1-score').textContent
-  console.log(currentScore)
-  const subtractOne = parseInt(currentScore) - 1
-  document.querySelector('.team-1-score').textContent = subtractOne
+  subTeamScore('.team-1-score')
 }
 
 const subTeamTwoScore = () => {
-  const currentScore = document.querySelector('.team-2-score').textContent
-  console.log(currentScore)
-  const subtractOne = parseInt(currentScore) - 1
-  document.querySelector('.team-2-score').textContent = subtractOne
+  subTeamScore('.team-2-score')
 }
 
 document.addEventListener('DOMContentLoaded', main)
@@ -59,6 +61,7 @@ document
 document
   .querySelector('.team-2-add-1-button')
   .addEventListener('click', addTeamTwoScore)
+
 document
   .querySelector('.team-1-subtract-1-button')
   .addEventListener('click', subTeamOneScore)
