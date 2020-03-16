@@ -20,8 +20,18 @@ body, html {
   height: 100%;
 }
 
-h1 {
+.reset h1 {
   text-align: center;
+}
+
+p {
+  margin: 2rem 0 0 0;
+  padding: 0;
+}
+
+.winner {
+  text-align: center;
+  font-size: 2rem;
 }
 
 .teams {

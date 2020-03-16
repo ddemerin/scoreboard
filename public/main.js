@@ -18,10 +18,12 @@ const updateTeamTwo = () => {
 }
 
 const addTeamScore = teamScore => {
-  const currentScore = document.querySelector(teamScore).textContent
-  console.log(currentScore)
-  const addOne = parseInt(currentScore) + 1
-  document.querySelector(teamScore).textContent = addOne
+  if (document.querySelector(teamScore).textContent < 21) {
+    const currentScore = document.querySelector(teamScore).textContent
+    const addOne = parseInt(currentScore) + 1
+    document.querySelector(teamScore).textContent = addOne
+  }
+  winState()
 }
 
 const addTeamOneScore = () => {
@@ -33,10 +35,11 @@ const addTeamTwoScore = () => {
 }
 
 const subTeamScore = teamScore => {
-  const currentScore = document.querySelector(teamScore).textContent
-  console.log(currentScore)
-  const addOne = parseInt(currentScore) - 1
-  document.querySelector(teamScore).textContent = addOne
+  if (document.querySelector(teamScore).textContent > 0) {
+    const currentScore = document.querySelector(teamScore).textContent
+    const addOne = parseInt(currentScore) - 1
+    document.querySelector(teamScore).textContent = addOne
+  }
 }
 
 const subTeamOneScore = () => {
@@ -45,6 +48,39 @@ const subTeamOneScore = () => {
 
 const subTeamTwoScore = () => {
   subTeamScore('.team-2-score')
+}
+
+const winState = () => {
+  if (
+    document.querySelector('.team-1-score').textContent === '21' ||
+    document.querySelector('.team-2-score').textContent === '21'
+  ) {
+    document.querySelector('.update-team-1-name').disabled = true
+    document.querySelector('.update-team-2-name').disabled = true
+    document.querySelector('.team-1-add-1-button').disabled = true
+    document.querySelector('.team-2-add-1-button').disabled = true
+    document.querySelector('.team-1-subtract-1-button').disabled = true
+    document.querySelector('.team-2-subtract-1-button').disabled = true
+    if (document.querySelector('.team-1-score').textContent === '21') {
+      document.querySelector('.winner').textContent =
+        document.querySelector('.team-1-name').textContent + ' wins!'
+    } else if (document.querySelector('.team-2-score').textContent === '21') {
+      document.querySelector('.winner').textContent =
+        document.querySelector('.team-2-name').textContent + ' wins!'
+    }
+  }
+}
+
+const resetGame = () => {
+  document.querySelector('.update-team-1-name').disabled = false
+  document.querySelector('.update-team-2-name').disabled = false
+  document.querySelector('.team-1-add-1-button').disabled = false
+  document.querySelector('.team-2-add-1-button').disabled = false
+  document.querySelector('.team-1-subtract-1-button').disabled = false
+  document.querySelector('.team-2-subtract-1-button').disabled = false
+  document.querySelector('.team-1-score').textContent = 0
+  document.querySelector('.team-2-score').textContent = 0
+  document.querySelector('.winner').textContent = ''
 }
 
 document.addEventListener('DOMContentLoaded', main)
@@ -68,3 +104,4 @@ document
 document
   .querySelector('.team-2-subtract-1-button')
   .addEventListener('click', subTeamTwoScore)
+document.querySelector('.reset').addEventListener('click', resetGame)
