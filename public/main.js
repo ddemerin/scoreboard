@@ -64,11 +64,27 @@ const winState = () => {
     if (document.querySelector('.team-1-score').textContent === '21') {
       document.querySelector('.winner').textContent =
         document.querySelector('.team-1-name').textContent + ' wins!'
+      teamTwoLoses()
     } else if (document.querySelector('.team-2-score').textContent === '21') {
       document.querySelector('.winner').textContent =
         document.querySelector('.team-2-name').textContent + ' wins!'
+      teamOneLoses()
     }
   }
+}
+
+const teamOneWins = () => {}
+
+const teamOneLoses = () => {
+  const teamOne = document.querySelector('.team-1-name').textContent
+  const loser = teamOne.strike()
+  document.querySelector('.team-1-name').innerHTML = loser
+}
+
+const teamTwoLoses = () => {
+  const teamOne = document.querySelector('.team-2-name').textContent
+  const loser = teamOne.strike()
+  document.querySelector('.team-2-name').innerHTML = loser
 }
 
 const resetGame = () => {
@@ -81,6 +97,12 @@ const resetGame = () => {
   document.querySelector('.team-1-score').textContent = 0
   document.querySelector('.team-2-score').textContent = 0
   document.querySelector('.winner').textContent = ''
+  document.querySelector('.team-1-name').textContent = document.querySelector(
+    '.team-1-name'
+  ).textContent
+  document.querySelector('.team-2-name').textContent = document.querySelector(
+    '.team-2-name'
+  ).textContent
 }
 
 document.addEventListener('DOMContentLoaded', main)
