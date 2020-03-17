@@ -114,7 +114,7 @@ const resetGame = () => {
   document.querySelector('.team-2-add-1-button').disabled = false
   document.querySelector('.team-1-subtract-1-button').disabled = false
   document.querySelector('.team-2-subtract-1-button').disabled = false
-  document.querySelector('.round-button').disabled = false
+  document.querySelector('.round-count').textContent = 1
   document.querySelector('.team-1-score').textContent = 0
   document.querySelector('.team-2-score').textContent = 0
   document.querySelector('.winner').textContent = ''
