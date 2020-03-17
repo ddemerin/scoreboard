@@ -64,27 +64,47 @@ const winState = () => {
     if (document.querySelector('.team-1-score').textContent === '21') {
       document.querySelector('.winner').textContent =
         document.querySelector('.team-1-name').textContent + ' wins!'
+      teamOneWins()
       teamTwoLoses()
     } else if (document.querySelector('.team-2-score').textContent === '21') {
       document.querySelector('.winner').textContent =
         document.querySelector('.team-2-name').textContent + ' wins!'
       teamOneLoses()
+      teamTwoWins()
     }
   }
 }
 
-const teamOneWins = () => {}
+const teamWins = (teamName, teamScore) => {
+  document.querySelector(teamName).style.color = 'green'
+  document.querySelector(teamScore).style.color = 'green'
+}
+
+const teamOneWins = () => {
+  teamWins('.team-1-name', '.team-1-score')
+}
+
+const teamTwoWins = () => {
+  teamWins('.team-2-name', '.team-2-score')
+}
+
+const teamLoses = (teamName, teamScore) => {
+  const loserName = document.querySelector(teamName).textContent
+  const loserScore = document.querySelector(teamScore).textContent
+  const nameStrike = loserName.strike()
+  const scoreStrike = loserScore.strike()
+  document.querySelector(teamName).innerHTML = nameStrike
+  document.querySelector(teamScore).innerHTML = scoreStrike
+  document.querySelector(teamName).style.color = 'red'
+  document.querySelector(teamScore).style.color = 'red'
+}
 
 const teamOneLoses = () => {
-  const teamOne = document.querySelector('.team-1-name').textContent
-  const loser = teamOne.strike()
-  document.querySelector('.team-1-name').innerHTML = loser
+  teamLoses('.team-1-name', '.team-1-score')
 }
 
 const teamTwoLoses = () => {
-  const teamOne = document.querySelector('.team-2-name').textContent
-  const loser = teamOne.strike()
-  document.querySelector('.team-2-name').innerHTML = loser
+  teamLoses('.team-2-name', '.team-2-score')
 }
 
 const resetGame = () => {
@@ -94,15 +114,28 @@ const resetGame = () => {
   document.querySelector('.team-2-add-1-button').disabled = false
   document.querySelector('.team-1-subtract-1-button').disabled = false
   document.querySelector('.team-2-subtract-1-button').disabled = false
+  document.querySelector('.round-button').disabled = false
   document.querySelector('.team-1-score').textContent = 0
   document.querySelector('.team-2-score').textContent = 0
   document.querySelector('.winner').textContent = ''
+  document.querySelector('.team-1-name').style.color = 'black'
+  document.querySelector('.team-2-name').style.color = 'black'
+  document.querySelector('.team-1-score').style.color = 'rgb(158, 158, 158)'
+  document.querySelector('.team-2-score').style.color = 'rgb(158, 158, 158)'
   document.querySelector('.team-1-name').textContent = document.querySelector(
     '.team-1-name'
   ).textContent
   document.querySelector('.team-2-name').textContent = document.querySelector(
     '.team-2-name'
   ).textContent
+}
+
+const nextRound = () => {
+  if (document.querySelector('.round-count').textContent < 4) {
+    const currentScore = document.querySelector('.round-count').textContent
+    const addOne = parseInt(currentScore) + 1
+    document.querySelector('.round-count').textContent = addOne
+  }
 }
 
 document.addEventListener('DOMContentLoaded', main)
@@ -127,3 +160,4 @@ document
   .querySelector('.team-2-subtract-1-button')
   .addEventListener('click', subTeamTwoScore)
 document.querySelector('.reset').addEventListener('click', resetGame)
+document.querySelector('.round-button').addEventListener('click', nextRound)
